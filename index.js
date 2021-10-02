@@ -24,10 +24,24 @@
 'use strict';
 
 let numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', ""),
-    lastMove = prompt('Один из последних просмотренных фильмов?', ""),
-    grade = prompt('На сколько оцените его?', ""),
-    lastMove1 = prompt('Один из последних просмотренных фильмов?', ""),
-    grade1 = prompt('На сколько оцените его?', "");
+    lastMove = [], grade = []
+
+if(!numberOfFilms) {
+  numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', "")
+}
+
+// for (let i = 0; i < 2; i++) {
+//   lastMove = prompt('Один из последних просмотренных фильмов?', ""),
+//   grade = prompt('На сколько оцените его?', "")
+  
+//   if(lastMove != null && grade != null && lastMove != '' && grade != '' && lastMove.length < 50) {
+//     personalMovieDB.movies[lastMove]=grade
+//   } else {
+//     i--;
+//   }
+// }
+
+
 
 const personalMovieDB = {
   count: numberOfFilms,
@@ -37,7 +51,14 @@ const personalMovieDB = {
   private: false
 }
 
-personalMovieDB.movies[lastMove]=grade
-personalMovieDB.movies[lastMove1]=grade1
-
 console.log(personalMovieDB)
+
+if (numberOfFilms < 10) {
+  document.write("<h1>Мало</h1>")
+} else if (numberOfFilms >10 && numberOfFilms < 50) {
+  document.write("<h1>много</h1>")
+} else if (numberOfFilms > 50) {
+  document.write("<h1>киноман</h1>")
+} else {
+  document.write("<h1>Err</h1>")
+}
