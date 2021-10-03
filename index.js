@@ -21,27 +21,19 @@
 
 Проверить, чтобы все работало без ошибок в консоли */
 
-'use strict';
+// 'use strict';
 
-let numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', ""),
-    lastMove = [], grade = []
+let numberOfFilms;
 
-if(!numberOfFilms) {
+function start(numberOfFilms) {
   numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', "")
+
+  while (numberOfFilms == "" || numberOfFilms == null || isNaN(numberOfFilms)) {
+    numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', "")
+  }
 }
 
-// for (let i = 0; i < 2; i++) {
-//   lastMove = prompt('Один из последних просмотренных фильмов?', ""),
-//   grade = prompt('На сколько оцените его?', "")
-  
-//   if(lastMove != null && grade != null && lastMove != '' && grade != '' && lastMove.length < 50) {
-//     personalMovieDB.movies[lastMove]=grade
-//   } else {
-//     i--;
-//   }
-// }
-
-
+start();
 
 const personalMovieDB = {
   count: numberOfFilms,
@@ -51,14 +43,47 @@ const personalMovieDB = {
   private: false
 }
 
-console.log(personalMovieDB)
-
-if (numberOfFilms < 10) {
-  document.write("<h1>Мало</h1>")
-} else if (numberOfFilms >10 && numberOfFilms < 50) {
-  document.write("<h1>много</h1>")
-} else if (numberOfFilms > 50) {
-  document.write("<h1>киноман</h1>")
-} else {
-  document.write("<h1>Err</h1>")
+function rememberMyFilms() {
+  for (let i = 0; i < 2; i++) {
+    lastMove = prompt('Один из последних просмотренных фильмов?', ""),
+    grade = prompt('На сколько оцените его?', "")
+    
+    if(lastMove != null && grade != null && lastMove != '' && grade != '' && lastMove.length < 50) {
+      personalMovieDB.movies[lastMove]=grade
+    } else {
+      i--;
+    }
+  }
 }
+
+rememberMyFilms()
+
+
+function showMyDB(private, db) {
+  if (!private) {
+    console.log(db);
+  }
+}
+showMyDB(personalMovieDB.private, personalMovieDB)
+
+function detectPersonalLevel() {
+  if (numberOfFilms < 10) {
+    document.write("<h1>Мало</h1>")
+  } else if (numberOfFilms >10 && numberOfFilms < 50) {
+    document.write("<h1>много</h1>")
+  } else if (numberOfFilms > 50) {
+    document.write("<h1>киноман</h1>")
+  } else {
+    document.write("<h1>Err</h1>")
+  }  
+}
+detectPersonalLevel();
+
+function writeYourGenres(genres) {
+  for (let i = 1; i < 4; i++) {
+     
+    genres[i - 1] = prompt(`Ваш любимый жанр №${i}?`, "");
+  }
+}
+
+writeYourGenres(personalMovieDB.genres)
